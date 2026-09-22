@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { audio } from "../../game/audio";
-import { MAG_SIZE, useGameStore } from "../../game/store";
+import { useGameStore } from "../../game/store";
 
 function Crosshair() {
   return (
@@ -198,7 +198,6 @@ export function HUD({ locked }: { locked: boolean }) {
       >
         {muted ? "sound off" : "sound on"}
       </button>
-      <span className="sr-only">{MAG_SIZE}</span>
     </div>
   );
 }
