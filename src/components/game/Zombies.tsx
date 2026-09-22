@@ -56,7 +56,7 @@ function Zombie({ id, kind }: { id: number; kind: SpawnKind }) {
   useLayoutEffect(() => {
     const parts = [head.current, body.current].filter(Boolean) as THREE.Mesh[];
     parts.forEach((p) => {
-      p.userData.zid = id;
+      p.userData["zid"] = id;
       hitboxes.push(p);
     });
     return () => {
