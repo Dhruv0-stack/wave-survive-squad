@@ -199,7 +199,7 @@ export function Zombies() {
     const remove: number[] = [];
     for (const z of zombies.values()) {
       if (z.state === "dead") {
-        if (now - z.deadAt > CORPSE_LINGER) remove.push(z.id);
+        if (performance.now() / 1000 - z.deadAt > CORPSE_LINGER) remove.push(z.id);
         continue;
       }
 

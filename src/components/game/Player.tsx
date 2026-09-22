@@ -83,8 +83,6 @@ export function Player() {
     if (z.hp <= 0) {
       z.state = "dead";
       z.deadAt = performance.now() / 1000;
-      // align corpse timer with the r3f clock used by Zombies.tsx
-      z.deadAt = 0;
       audio.kill();
       const points = headshot ? 150 : 100;
       const store = useGameStore.getState();
