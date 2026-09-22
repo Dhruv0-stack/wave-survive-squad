@@ -12,7 +12,7 @@ useGLTF.preload(URL);
 
 /** First-person weapon view-model, parented to the camera. */
 export function Weapon() {
-  const { scene, camera } = { ...useGLTF(URL), camera: null as never };
+  const { scene } = useGLTF(URL);
   const rig = useRef<THREE.Group>(null);
   const flash = useRef<THREE.PointLight>(null);
   const flashMesh = useRef<THREE.Mesh>(null);
@@ -30,8 +30,7 @@ export function Weapon() {
     return c;
   }, [scene]);
 
-  useFrame((state, rawDelta) => {
-    const delta = Math.min(rawDelta, 0.05);
+  useFrame((state) => {
     const g = rig.current;
     if (!g) return;
     const store = useGameStore.getState();
@@ -57,7 +56,6 @@ export function Weapon() {
     g.rotation.x += cam.rotation.x;
     g.rotation.y += cam.rotation.y;
     g.rotation.z += cam.rotation.z;
-    g.updateMatrix();
 
     const m = playerState.muzzle;
     if (flash.current) flash.current.intensity = m * 26;
@@ -65,10 +63,7 @@ export function Weapon() {
       flashMesh.current.visible = m > 0.15;
       flashMesh.current.scale.setScalar(0.1 + m * 0.35);
     }
-    void delta;
   });
-
-  void camera;
 
   return (
     <group ref={rig}>
