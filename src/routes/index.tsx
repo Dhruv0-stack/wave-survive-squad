@@ -1,24 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+import { GameCanvas } from "../components/game/GameCanvas";
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route = createFileRoute("/")({
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Graveyard Shift — Zombie Survival FPS" },
+      {
+        name: "description",
+        content:
+          "Hold a moonlit cemetery against endless waves of the undead in this browser first-person zombie survival shooter.",
+      },
+      { property: "og:title", content: "Graveyard Shift — Zombie Survival FPS" },
+      {
+        property: "og:description",
+        content:
+          "Endless wave-based zombie survival in a 3D graveyard. Headshots earn bonus points — how deep can you get?",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: GameCanvas,
+});
