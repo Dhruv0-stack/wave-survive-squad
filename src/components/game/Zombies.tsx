@@ -17,8 +17,10 @@ import {
 
 const MODEL = "/models/character-zombie.glb";
 const RUNNER = "/models/character-skeleton.glb";
-useGLTF.preload(MODEL);
-useGLTF.preload(RUNNER);
+if (typeof window !== "undefined") {
+  useGLTF.preload(MODEL);
+  useGLTF.preload(RUNNER);
+}
 
 const MAX_ALIVE = 16;
 const ATTACK_RANGE = 1.9;

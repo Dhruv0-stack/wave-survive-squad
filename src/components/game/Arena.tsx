@@ -20,7 +20,7 @@ const PROPS = [
   "/models/fire-basket.glb",
   "/models/crate-medium.glb",
 ];
-PROPS.forEach((p) => useGLTF.preload(p));
+if (typeof window !== "undefined") PROPS.forEach((p) => useGLTF.preload(p));
 
 export function Ground() {
   const tex = useMemo(() => makeGroundTexture(), []);

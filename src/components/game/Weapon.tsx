@@ -8,7 +8,7 @@ import { useGameStore } from "../../game/store";
 import { playerState } from "../../game/world";
 
 const URL = "/models/blaster-e.glb";
-useGLTF.preload(URL);
+if (typeof window !== "undefined") useGLTF.preload(URL);
 
 /** First-person weapon view-model, parented to the camera. */
 export function Weapon() {

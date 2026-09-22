@@ -1,9 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Suspense, lazy, useEffect, useState } from "react";
 
-import { GameCanvas } from "../components/game/GameCanvas";
+const GameCanvas = lazy(() =>
+  import("../components/game/GameCanvas").then((m) => ({ default: m.GameCanvas })),
+);
+
+function Splash({ label }: { label: string }) {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-[#0a0c12] font-mono text-sm tracking-[0.3em] text-stone-500">
+      {label}
+    </div>
+  );
+}
+
+function GamePage() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <Splash label="LOADING…" />;
+
+  return (
+    <Suspense fallback={<Splash label="ENTERING THE GRAVEYARD…" />}>
+      <GameCanvas />
+    </Suspense>
+  );
+}
 
 export const Route = createFileRoute("/")({
-  ssr: false,
   head: () => ({
     meta: [
       { title: "Graveyard Shift — Zombie Survival FPS" },
@@ -22,5 +45,5 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: GameCanvas,
+  component: GamePage,
 });
