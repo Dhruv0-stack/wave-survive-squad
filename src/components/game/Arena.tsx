@@ -57,7 +57,7 @@ function useLayout(): Placed[] {
       const a = rnd() * Math.PI * 2;
       const r = 5 + rnd() * (ARENA_RADIUS - 8);
       out.push({
-        url: stones[Math.floor(rnd() * stones.length)],
+        url: stones[Math.floor(rnd() * stones.length)]!,
         pos: [Math.cos(a) * r, 0, Math.sin(a) * r],
         rot: rnd() * Math.PI * 2,
         scale: 0.9 + rnd() * 0.5,
