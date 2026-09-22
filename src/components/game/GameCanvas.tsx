@@ -28,12 +28,12 @@ function Stage() {
     <>
       <color attach="background" args={["#0a0c12"]} />
       <fogExp2 attach="fog" args={["#0a0c12", 0.028]} />
-      <hemisphereLight args={["#4a5878", "#141210", 0.55]} />
-      <ambientLight intensity={0.35} color="#2b3550" />
+      <hemisphereLight args={["#6f83ab", "#1d1a16", 1.1]} />
+      <ambientLight intensity={0.7} color="#3d4a6b" />
       {/* moonlight */}
       <directionalLight
         position={[-24, 30, -12]}
-        intensity={1.15}
+        intensity={2.2}
         color="#9fb6e8"
         castShadow
         shadow-mapSize-width={2048}

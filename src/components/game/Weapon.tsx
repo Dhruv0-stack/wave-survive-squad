@@ -21,7 +21,8 @@ export function Weapon() {
     const c = skinClone(scene);
     const box = new THREE.Box3().setFromObject(c);
     const size = box.getSize(new THREE.Vector3());
-    c.scale.setScalar(0.42 / (size.y || 1));
+    const longest = Math.max(size.x, size.y, size.z) || 1;
+    c.scale.setScalar(0.5 / longest);
     c.rotation.y = Math.PI;
     c.traverse((o) => {
       const m = o as THREE.Mesh;
@@ -45,7 +46,7 @@ export function Weapon() {
     const reloadDip = store.reloading ? 0.18 : 0;
     const kick = playerState.recoil * 1.6;
 
-    g.position.set(0.22 + sway, -0.2 + lift - reloadDip, -0.45 + kick * 0.6);
+    g.position.set(0.26 + sway, -0.26 + lift - reloadDip, -0.62 + kick * 0.6);
     g.rotation.set(
       -playerState.recoil * 2 - reloadDip * 2.2,
       Math.PI + sway * 0.6,
